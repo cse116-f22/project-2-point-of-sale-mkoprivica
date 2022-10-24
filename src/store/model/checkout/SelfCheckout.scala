@@ -1,30 +1,41 @@
 package store.model.checkout
 
 import store.model.items.Item
+import store.view.SelfCheckoutGUI
 
-class SelfCheckout {
+class SelfCheckout() {
+
+
+  var display: String = ""
+  var inventory: Map[String, Item] = Map()
+  var cart: List[Item] = List()
 
   def addItemToStore(barcode: String, item: Item): Unit = {
     // This method adds an item to your store's checkout system. It does not add an item to the customer's cart
-    // TODO
+    //
+    this.inventory += (barcode -> item)
   }
 
   def numberPressed(number: Int): Unit = {
-    // TODO
+    //
+    this.display += number
   }
 
   def clearPressed(): Unit = {
-    // TODO
+    this.display = ""
+    //
   }
 
   def enterPressed(): Unit = {
-    // TODO
+    //
+    this.cart = this.cart :+ this.inventory.getOrElse(this.display,
+      new Item("error",0.0))
+    this.display = ""
   }
 
   def checkoutPressed(): Unit = {
-    // TODO
+  // TODO
   }
-
   def cashPressed(): Unit = {
     // TODO
   }
@@ -39,11 +50,12 @@ class SelfCheckout {
 
   def displayString(): String = {
     ""
-    // TODO
+    this.display
+    //
   }
 
   def itemsInCart(): List[Item] = {
-    List()
+    this.cart
   }
 
   def subtotal(): Double = {
@@ -71,8 +83,8 @@ class SelfCheckout {
     // write a similar method in your Test Suite classes.
 
     // Example usage:
-    //val testItem: Item = new Item("test item", 100.0)
-    //this.addItemToStore("472", testItem)
+    val testItem: Item = new Item("test item", 100.0)
+    this.addItemToStore("472", testItem)
   }
 
 }
