@@ -59,8 +59,9 @@ class Task1 extends FunSuite {
     testSelfCheckout.numberPressed(5)
     assert(testSelfCheckout.displayString() == "15")
     testSelfCheckout.enterPressed()
-    assert(testSelfCheckout.itemsInCart() == List(testItem, testItem, testItem2,error )
+    assert(testSelfCheckout.itemsInCart() == List(testItem, testItem, testItem2, error))
   }
+
 
   test("clear button") {
     testSelfCheckout.numberPressed(7)
