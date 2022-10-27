@@ -28,8 +28,9 @@ class SelfCheckout() {
 
   def enterPressed(): Unit = {
     //
+    var error = new Item("error",0.0)
     this.cart = this.cart :+ this.inventory.getOrElse(this.display,
-      new Item("error",0.0))
+      error)
     this.display = ""
   }
 
