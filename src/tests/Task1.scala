@@ -54,14 +54,16 @@ class Task1 extends FunSuite {
   }
 
   test("invalid barcode") {
+    var epsilon: Double = .001
+    var expected_base: Double = 0.0
 
     testSelfCheckout.numberPressed(1)
     testSelfCheckout.numberPressed(5)
     assert(testSelfCheckout.displayString() == "15")
     testSelfCheckout.enterPressed()
     assert(testSelfCheckout.itemsInCart() == List(testItem, testItem, testItem2,testSelfCheckout.itemsInCart().last))
-    //assert(testSelfCheckout.itemsInCart().last.description() == "error")
-    //assert(testSelfCheckout.itemsInCart().last.price() == 0.0)
+    assert(testSelfCheckout.itemsInCart().last.description() == "error")
+    assert(Math.abs(testSelfCheckout.itemsInCart().last.price() - expected_base) < epsilon)
   }
 
 
@@ -74,3 +76,4 @@ class Task1 extends FunSuite {
 
 
 }
+
