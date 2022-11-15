@@ -5,10 +5,13 @@ import store.view.SelfCheckoutGUI
 
 class SelfCheckout() {
 
+  var state: State = new Rescan(this)
 
   var display: String = ""
   var inventory: Map[String, Item] = Map()
   var cart: List[Item] = List()
+
+
 
   def addItemToStore(barcode: String, item: Item): Unit = {
     // This method adds an item to your store's checkout system. It does not add an item to the customer's cart
@@ -17,32 +20,26 @@ class SelfCheckout() {
   }
 
   def numberPressed(number: Int): Unit = {
-    //
-    this.display += number
+    this.state.numberPressed(number)
   }
 
   def clearPressed(): Unit = {
-    this.display = ""
-    //
+    this.state.clearPressed()
   }
 
   def enterPressed(): Unit = {
-    //
-    var error = new Item("error",0.0)
-    this.cart = this.cart :+ this.inventory.getOrElse(this.display,
-      error)
-    this.display = ""
+    this.state.enterPressed()
   }
 
   def checkoutPressed(): Unit = {
-  // TODO
+    this.state.checkoutPressed()
   }
   def cashPressed(): Unit = {
-    // TODO
+    this.state.cashPressed()
   }
 
   def creditPressed(): Unit = {
-    // TODO
+    this.state.creditPressed()
   }
 
   def loyaltyCardPressed(): Unit = {
@@ -52,7 +49,6 @@ class SelfCheckout() {
   def displayString(): String = {
     ""
     this.display
-    //
   }
 
   def itemsInCart(): List[Item] = {
